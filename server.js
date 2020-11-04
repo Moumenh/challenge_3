@@ -29,20 +29,49 @@ app.get('/app', (req, res) =>{
 
 app.post('/user' , (req,res) => {
     console.log(req.body)
-    let user = new User
-    res.send('done')
+    let user = new User(req.body)
+    user.save( (err , user) => {
+        if(err) {
+            res.status(404).send('failed')
+        } else {
+            res.status(201).json({
+                success : true,
+                user : user._id
+            })
+        }
+    })
+    
 })
 
 app.post('/address' , (req,res) => {
     console.log(req.body)
-    let address = new Address
-    res.send('done')
+    let address = new Address(req.body)
+    address.save((err,address) => {
+        if(err){
+            res.status(404).send('failed')
+        }else{
+            res.status(201).json({
+                success : true,
+                address : address._id
+            })
+        }
+    })
+    
 })
 
 app.post('/credit' , (req,res) => {
     console.log(req.body)
-    let credit = new Credit
-    res.send('done')
+    let credit = new Credit(req.body)
+    credit.save((err,credit) => {
+        if(err){
+            res.status(404).send('failed')
+        }else{
+            res.status(201).json({
+                success : true,
+                credit : credit._id
+            })
+        }
+    })
 })
 
 

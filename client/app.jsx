@@ -9,6 +9,7 @@ class App extends React.Component {
       super()
       this.state = {
         pages : 0,
+        userId : {},
         user : {
             name : '',
             email: '',

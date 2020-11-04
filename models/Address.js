@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
+const { string } = require('prop-types')
 
 const addressSchema = mongoose.Schema({
     userId: {
         type : mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    lineOne :String,
+    lineTwo :String,
     city: String,
     state : String,
     zipCode :Number,
