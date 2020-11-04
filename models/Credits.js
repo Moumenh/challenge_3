@@ -9,7 +9,7 @@ const creditSchema = mongoose.Schema({
         type : Number,
         unique : true
     },
-    expiryDate: Number,
+    expiryDate: String,
     CVV:Number,
     zipCode: Number
 },{timestamps: true})
