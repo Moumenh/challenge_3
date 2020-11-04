@@ -1,0 +1,35 @@
+{
+  "name": "challenge_3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "build:watch": "babel . --out-dir compiled --presets=react --ignore=node_modules,compiled --source-maps inline --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moumenh/challenge_3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Moumenh/challenge_3/issues"
+  },
+  "homepage": "https://github.com/Moumenh/challenge_3#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lodash": "^4.6.1",
+    "mongoose": "^5.10.11",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-plugin-react": "1.0.0",
+    "babel-preset-react": "^6.5.0",
+    "react-test-renderer": "^16.12.0"
+  }
+}
