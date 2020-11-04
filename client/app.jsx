@@ -9,8 +9,7 @@ class App extends React.Component {
         super()
         this.state = {
             pages: 0,
-            userId: {},
-            input: '',
+            userId: '',
 
             name: '',
             email: '',
@@ -33,12 +32,30 @@ class App extends React.Component {
         }
     }
 
+    userSubmit(){
+        console.log('heeeere')
+        const { name , email , password } = this.state
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name,email,password })
+        };
+        fetch('http://127.0.0.1:3000/user', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ userId: data.id })
+                console.log(data)
+            });
+    }
+
     handleChange(event){
         const {name,value} = event.target;
 
         this.setState({[name] : value})
         
     }
+
+   
   
   
     render() {
@@ -56,19 +73,35 @@ class App extends React.Component {
                         (this.state.pages === 1) ?
                             <div className="signup-form">
                                 
-                                <form className="" action="index.html" method="post">
+                                <form className="">
                                     <h1>Sign Up</h1>
                                     <input type="text" value = {name} placeholder="Full Name" name='name' onChange={this.handleChange.bind(this)} className="txtb" />
                                     <input type="email" value = {email} placeholder="Email" name='email' onChange={this.handleChange.bind(this)} className="txtb" />
                                     <input type="password" value = {password} placeholder="Password" name='password' onChange={this.handleChange.bind(this)} className="txtb" />
-                                    <input type="submit" value="Create Account" className="signup-btn"  onClick={() => this.setState({ pages: 2 })} />
+                                    <input type="submit" value="Create Account" className="signup-btn"
+                                        onClick={(e) => {
+                                            this.setState({ pages: 2 })
+                                            e.preventDefault()
+                                            const { name, email, password } = this.state
+                                            const requestOptions = {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ name, email, password })
+                                            };
+                                            fetch('http://127.0.0.1:3000/user', requestOptions)
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    this.setState({ userId: data.id })
+                                                    console.log(data)
+                                                })
+                                        }} />
                                 </form>
                             </div>
                             :
                             (this.state.pages === 2) ?
                                 <div className="signup-form">
                                     
-                                    <form className="" action="index.html" method="post">
+                                    <form className="">
                                         <h1>Address Info</h1>
                                         <input type="text" value = {lineOne} placeholder="First Line" name='lineOne' onChange={this.handleChange.bind(this)} className="txtb" />
                                         <input type="text" value = {lineTwo} placeholder="Second Line" name='lineTwo' onChange={this.handleChange.bind(this)} className="txtb" />
@@ -83,7 +116,7 @@ class App extends React.Component {
                                 (this.state.pages === 3) ?
                                     <div className="signup-form">
                                         
-                                        <form className="" action="index.html" method="post">
+                                        <form className="">
                                             <h1>Address Info</h1>
                                             <input type="text" value = {creditCard} name='creditCard' placeholder="Credit Card" onChange={this.handleChange.bind(this)} className="txtb" />
                                             <input type="text" value = {expiryDate} name='expiryDate' placeholder="Expiry Date" onChange={this.handleChange.bind(this)} className="txtb" />
