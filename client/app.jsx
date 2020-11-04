@@ -91,8 +91,8 @@ class App extends React.Component {
                                             fetch('http://127.0.0.1:3000/user', requestOptions)
                                                 .then(response => response.json())
                                                 .then(data => {
-                                                    this.setState({ userId: data.id })
-                                                    console.log(data)
+                                                    this.setState({ userId: data.user, cardUser:data.user })
+                                                    console.log(this.state.cardUser)
                                                 })
                                         }} />
                                 </form>
@@ -109,7 +109,21 @@ class App extends React.Component {
                                         <input type="text" value = {state} placeholder="State" name='state' onChange={this.handleChange.bind(this)} className="txtb" />
                                         <input type="text" value = {zipCode} placeholder="Zip Code" name='zipCode' onChange={this.handleChange.bind(this)}  className="txtb" />
                                         <input type="text" value = {phone} placeholder="Phone Number" name='phone' onChange={this.handleChange.bind(this)} className="txtb" />
-                                        <input type="submit" value="Credit Page" className="signup-btn" onClick={() => this.setState({ pages: 3 })} />
+                                        <input type="submit" value="Credit Page" className="signup-btn" onClick={(e) => {
+                                            this.setState({ pages: 3 })
+                                            e.preventDefault()
+                                            const { userId, lineOne, lineTwo, city, state, zipCode, phone } = this.state
+                                            const requestOptions = {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ userId, lineOne, lineTwo, city, state, zipCode, phone })
+                                            };
+                                            fetch('http://127.0.0.1:3000/address', requestOptions)
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    console.log(data)
+                                                })
+                                        }} />
                                     </form>
                                 </div>
                                 :
@@ -122,7 +136,21 @@ class App extends React.Component {
                                             <input type="text" value = {expiryDate} name='expiryDate' placeholder="Expiry Date" onChange={this.handleChange.bind(this)} className="txtb" />
                                             <input type="text" value = {CVV} name='CVV' placeholder="CVV" onChange={this.handleChange.bind(this)} className="txtb" />
                                             <input type="text" value = {zipCodeB} name='zipCodeB' placeholder="Zip Code" onChange={this.handleChange.bind(this)} className="txtb" />
-                                            <input type="submit" value="Data Page" className="signup-btn" onClick={() => this.setState({ pages: 4 })} />
+                                            <input type="submit" value="Data Page" className="signup-btn" onClick={(e) =>{
+                                                this.setState({ pages: 4 })
+                                                e.preventDefault()
+                                                const { cardUser, creditCard, expiryDate, CVV, zipCodeB } = this.state
+                                                const requestOptions = {
+                                                    method: 'POST',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    body: JSON.stringify({ cardUser, creditCard, expiryDate, CVV, zipCodeB  })
+                                                };
+                                                fetch('http://127.0.0.1:3000/credit', requestOptions)
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        console.log(data)
+                                                    })
+                                            }} />
                                         </form>
                                     </div>
                                     :

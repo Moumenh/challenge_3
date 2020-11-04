@@ -40,7 +40,7 @@ app.post('/user' , (req,res) => {
             })
         }
     })
-    res.json(req.body)
+    // res.json(req.body)
     
 })
 
