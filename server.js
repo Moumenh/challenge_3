@@ -1,6 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const {User} = require('./models/Users')
+const {Credit} = require('./models/Credits')
+const {Address} = require('./models/Address')
 
 const app = express()
 
@@ -20,12 +23,26 @@ mongoose.connect('mongodb+srv://m0moooZ:momoftw1!@react-blog.pf36a.mongodb.net/C
   .catch(err => console.log(err))
 
 
-app.get('/app', function(req, res){
+app.get('/app', (req, res) =>{
     res.sendFile(__dirname+'/./compiled/client/app.js');
 })
 
-app.get('/checkout1', function(req, res){
-    res.sendFile(__dirname+'/./compiled/client/Checkout1.js');
+app.post('/user' , (req,res) => {
+    console.log(req.body)
+    let user = new User
+    res.send('done')
+})
+
+app.post('/address' , (req,res) => {
+    console.log(req.body)
+    let address = new Address
+    res.send('done')
+})
+
+app.post('/credit' , (req,res) => {
+    console.log(req.body)
+    let credit = new Credit
+    res.send('done')
 })
 
 

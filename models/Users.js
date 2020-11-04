@@ -13,20 +13,7 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         minglength: 5
-    },
-    lineOne: {
-        type:String,
-        maxlength: 50
-    },
-    lineTwo : {
-        type:String,
-        maxlength: 50
-    },
-    city: String,
-    state : String,
-    zipCode :Number,
-    phone: Number
-
+    }
 },{timestamps: true})
 
 const User = mongoose.model('User', userSchema)
